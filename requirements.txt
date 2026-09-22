@@ -33,7 +33,7 @@ tensorboard>=2.19
 
 # ── Document processing ──────────────────────────────────
 pdfplumber>=0.11
-python-docx>=1.1
+python-docx>=1.2.0
 python-pptx>=1.0
 numpy>=1.26
 
