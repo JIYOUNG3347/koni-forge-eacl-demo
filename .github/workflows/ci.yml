@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v4
 
       # Python — ruff
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
       - name: Install ruff
@@ -47,7 +47,7 @@ jobs:
       - uses: actions/checkout@v4
 
       # Python — mypy
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
       - name: Install mypy + stubs
@@ -76,7 +76,7 @@ jobs:
       - uses: actions/checkout@v4
 
       # Python — pytest
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
           cache: "pip"
