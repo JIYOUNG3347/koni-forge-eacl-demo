@@ -1,0 +1,124 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  # ── 1. Lint ───────────────────────────────────────────────────────────────
+  lint:
+    name: Lint
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+
+      # Python — ruff
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install ruff
+        run: pip install "ruff>=0.4.0"
+      - name: ruff check
+        run: ruff check .
+
+      # Frontend — ESLint + Prettier
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: "npm"
+          cache-dependency-path: UI/package-lock.json
+      - name: Install UI deps
+        run: npm ci
+        working-directory: UI
+      - name: ESLint
+        run: npm run lint
+        working-directory: UI
+      - name: Prettier check
+        run: npm run format:check
+        working-directory: UI
+
+  # ── 2. Type Check ─────────────────────────────────────────────────────────
+  typecheck:
+    name: Type Check
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+
+      # Python — mypy
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install mypy + stubs
+        run: pip install "mypy>=1.8.0" "pydantic==2.10.6"
+      - name: mypy check
+        run: mypy --config-file pyproject.toml
+
+      # Frontend — tsc
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: "npm"
+          cache-dependency-path: UI/package-lock.json
+      - name: Install UI deps
+        run: npm ci
+        working-directory: UI
+      - name: TypeScript check
+        run: npm run typecheck
+        working-directory: UI
+
+  # ── 3. Unit Tests ─────────────────────────────────────────────────────────
+  unit-test:
+    name: Unit Tests
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+
+      # Python — pytest
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+          cache-dependency-path: requirements.txt
+      - name: Install deps
+        run: pip install -r requirements.txt
+      - name: pytest
+        run: pytest tests/unit/
+
+      # Frontend — vitest
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: "npm"
+          cache-dependency-path: UI/package-lock.json
+      - name: Install UI deps
+        run: npm ci
+        working-directory: UI
+      - name: vitest
+        run: npm test
+        working-directory: UI
+
+  # ── 4. Frontend Build ──────────────────────────────────────────────────────
+  frontend-build:
+    name: Frontend Build
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: "npm"
+          cache-dependency-path: UI/package-lock.json
+      - name: Install UI deps
+        run: npm ci
+        working-directory: UI
+      - name: Vite build
+        run: npm run build
+        working-directory: UI
+      - name: Report bundle size
+        run: |
+          echo "=== JS chunk sizes (top 20) ==="
+          find UI/build/assets -name "*.js" -exec du -sh {} \; 2>/dev/null | sort -h | tail -20 || true
+          echo "=== Total build size ==="
+          du -sh UI/build/ | cut -f1

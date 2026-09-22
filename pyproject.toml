@@ -1,0 +1,37 @@
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+exclude = [
+    ".venv",
+    ".git",
+    ".run",
+    "__pycache__",
+    "storage",
+    "logs",
+    "UI/node_modules",
+]
+
+[tool.ruff.lint]
+# E: pycodestyle, F: pyflakes, I: isort, B: bugbear
+select = ["E4", "E7", "E9", "F", "I", "B006", "B007", "B008"]
+ignore = [
+    "E402",   # module-level import not at top (common in app entry points)
+    "B008",   # function call in a default argument (the FastAPI Depends pattern)
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["modules", "server", "celery_app", "pipelines"]
+
+[tool.mypy]
+# Matches the CI runner; some dependency stubs need 3.12 syntax.
+python_version = "3.12"
+ignore_missing_imports = true
+check_untyped_defs = true
+warn_unused_ignores = false
+follow_imports = "silent"
+files = ["tests/unit"]
+exclude = ["storage", ".venv"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests/unit"]

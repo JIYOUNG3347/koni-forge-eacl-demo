@@ -1,0 +1,7 @@
+# Existing source files are excluded from PR-01 formatting check.
+# A dedicated formatting PR will run `prettier --write src` and remove these ignores.
+src/
+build/
+node_modules/
+# Auto-generated lock file — not formatted by prettier.
+package-lock.json

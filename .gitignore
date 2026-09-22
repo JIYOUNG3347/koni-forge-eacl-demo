@@ -1,0 +1,72 @@
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+*.egg
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv-ci/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+.env.test
+
+# Test fixtures (may hold API keys or experiment data)
+test_fixtures/
+storage/test_fixtures/
+
+# Runtime storage (models, chroma DB, datasets, logs, user data)
+storage/
+
+# Data directories (runtime)
+dataset/
+models/
+!server/models/
+raw_dataset/
+generated_dataset/
+evaluation_dataset/
+outs/
+
+# Tool caches
+.ruff_cache/
+.pytest_cache/
+.mypy_cache/
+
+# Build artifacts
+UI/build/
+UI/node_modules/
+UI/dist/
+
+# Frontend build output served by the app
+static/assets/
+static/index.html
+
+# Local operator limits. Copy host.toml.example to host.toml and edit it.
+host.toml
+
+# run.sh process ids and logs
+.run/
+
+# Logs
+*.log
+logs/
+app/logs/
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,201 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+
+  /* Ensure Radix popover/select content always has a solid white background */
+  [data-slot="select-content"] {
+    background-color: white !important;
+  }
+
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 10%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 10%;
+    --primary: 0 0% 10%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 40 6% 96%;
+    --secondary-foreground: 0 0% 10%;
+    --muted: 40 6% 96%;
+    --muted-foreground: 0 0% 45%;
+    --accent: 42 3% 20%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 72% 63%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 0 0% 45%;
+    --radius: 0.5rem;
+    --chart-1: 0 0% 10%;
+    --chart-2: 0 0% 33%;
+    --chart-3: 0 0% 50%;
+    --chart-4: 0 0% 70%;
+    --chart-5: 0 0% 85%;
+  }
+
+  .dark {
+    --background: 0 0% 10%;
+    --foreground: 0 0% 90%;
+    --card: 0 0% 18%;
+    --card-foreground: 0 0% 90%;
+    --popover: 0 0% 18%;
+    --popover-foreground: 0 0% 90%;
+    --primary: 0 0% 90%;
+    --primary-foreground: 0 0% 10%;
+    --secondary: 0 0% 18%;
+    --secondary-foreground: 0 0% 90%;
+    --muted: 0 0% 18%;
+    --muted-foreground: 0 0% 63%;
+    --accent: 0 0% 90%;
+    --accent-foreground: 0 0% 10%;
+    --destructive: 0 72% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 23%;
+    --input: 0 0% 23%;
+    --ring: 0 0% 63%;
+    --chart-1: 0 0% 90%;
+    --chart-2: 0 0% 70%;
+    --chart-3: 0 0% 50%;
+    --chart-4: 0 0% 33%;
+    --chart-5: 0 0% 23%;
+  }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Animations, moved here from styles/globals.css. That file is written in
+   Tailwind v4 syntax (@theme / @custom-variant), so importing it breaks the
+   build (`@layer base` without `@tailwind base`) — and because nothing
+   imported it, every definition in it was dead. This file is the only CSS
+   main.tsx reads.
+   ───────────────────────────────────────────────────────────── */
+
+/* Home dashboard animations */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes slide-in-right {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(8px, -6px) scale(1.02); }
+  66% { transform: translate(-4px, 4px) scale(0.98); }
+}
+@keyframes count-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-up { animation: fade-up 0.6s ease-out both; }
+.animate-fade-in { animation: fade-in 0.5s ease-out both; }
+.animate-slide-in-right { animation: slide-in-right 0.5s ease-out both; }
+.animate-float { animation: float 8s ease-in-out infinite; }
+.animate-count-up { animation: count-up 0.5s ease-out both; }
+
+/* Heartbeat animation for status dot */
+@keyframes heartbeat {
+  0% {
+    transform: scale(1);
+    opacity: 0.85;
+  }
+  20% {
+    transform: scale(1.25);
+    opacity: 1;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  60% {
+    transform: scale(1.25);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.85;
+  }
+}
+
+/* Agent bubble shimmer loading bar */
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(400%); }
+}
+
+/* HomeView hero entrance */
+@keyframes fade-slide-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Pipeline connector traveling highlight */
+@keyframes pipeline-flow {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* Typewriter cursor blink */
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* Guided running ring pulse */
+@keyframes ring-pulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50%       { opacity: 0.15; transform: scale(1.06); }
+}
+
+/* Hero dot-grid slow drift */
+@keyframes dot-drift {
+  from { background-position: 0px 0px; }
+  to   { background-position: 24px 24px; }
+}
+
+/* H1 title subtle glow pulse */
+@keyframes title-glow {
+  0%, 100% { text-shadow: none; }
+  50%       { text-shadow: 0 0 28px rgba(255,255,255,0.10), 0 0 56px rgba(255,255,255,0.04); }
+}
+
+/* Feature tag stagger-in */
+@keyframes tag-pop {
+  from { opacity: 0; transform: scale(0.92) translateY(4px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Live dot pulse */
+@keyframes live-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(0.7); }
+}
+
+/* Stage icon breathe */
+@keyframes icon-pulse {
+  0%, 100% { transform: scale(1);    box-shadow: 0 0 0 0px rgba(0,0,0,0); }
+  50%       { transform: scale(1.18); box-shadow: 0 0 0 4px rgba(0,0,0,0.07); }
+}
+
+/* MonitorView pipeline stages — the dot travelling along the dashed connector */
+@keyframes conn-travel {
+  0%   { left: 0;                opacity: 0; }
+  12%  {                         opacity: 0.85; }
+  78%  { left: calc(100% - 5px); opacity: 0.85; }
+  86%  { left: calc(100% - 5px); opacity: 0; }
+  100% { left: calc(100% - 5px); opacity: 0; }
+}

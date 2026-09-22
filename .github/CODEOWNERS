@@ -1,0 +1,8 @@
+# KONI-Forge Code Owners
+# All files: default reviewer is the repository owner.
+* @jychoi-kisti
+
+# Security-sensitive paths require explicit owner review.
+server/core/users.py @jychoi-kisti
+api.py @jychoi-kisti
+.github/workflows/ @jychoi-kisti
