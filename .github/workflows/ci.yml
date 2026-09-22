@@ -24,7 +24,7 @@ jobs:
         run: ruff check .
 
       # Frontend — ESLint + Prettier
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: "18"
           cache: "npm"
@@ -56,7 +56,7 @@ jobs:
         run: mypy --config-file pyproject.toml
 
       # Frontend — tsc
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: "18"
           cache: "npm"
@@ -87,7 +87,7 @@ jobs:
         run: pytest tests/unit/
 
       # Frontend — vitest
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: "18"
           cache: "npm"
@@ -105,7 +105,7 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: "18"
           cache: "npm"
