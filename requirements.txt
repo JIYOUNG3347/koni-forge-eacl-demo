@@ -11,7 +11,7 @@ python-multipart>=0.0.20
 pydantic>=2.10,<3
 
 # ── Task queue and cache ─────────────────────────────────
-celery[redis]>=5.4,<6
+celery[redis]>=5.6.3,<6
 redis>=5.2,<6
 
 # ── Database ─────────────────────────────────────────────
