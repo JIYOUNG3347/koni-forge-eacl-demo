@@ -57,7 +57,8 @@ static/assets/
 static/index.html
 
 # Local operator limits. Copy host.toml.example to host.toml and edit it.
-host.toml
+# Root-anchored: tests/fixtures/host.toml is a committed fixture.
+/host.toml
 
 # run.sh process ids and logs
 .run/
