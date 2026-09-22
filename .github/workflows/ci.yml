@@ -12,7 +12,7 @@ jobs:
     name: Lint
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       # Python — ruff
       - uses: actions/setup-python@v5
@@ -44,7 +44,7 @@ jobs:
     name: Type Check
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       # Python — mypy
       - uses: actions/setup-python@v5
@@ -73,7 +73,7 @@ jobs:
     name: Unit Tests
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       # Python — pytest
       - uses: actions/setup-python@v5
@@ -104,7 +104,7 @@ jobs:
     name: Frontend Build
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/setup-node@v4
         with:
           node-version: "18"
