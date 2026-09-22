@@ -27,7 +27,7 @@ torch>=2.6
 transformers>=4.49,<5
 datasets>=3.6,<5
 accelerate>=1.6
-peft>=0.15
+peft>=0.21.0
 trl>=1.5,<1.7
 tensorboard>=2.19
 
